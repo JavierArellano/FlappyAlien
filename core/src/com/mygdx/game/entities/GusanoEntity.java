@@ -33,8 +33,8 @@ public class GusanoEntity extends Actor {
         TextureRegion gusanoLavaAni = new TextureRegion(texture, 477, 0, 52,147);
 
         BodyDef def = new BodyDef();
-        if (flip) {
-            def.position.set(x, y + 0.5f);
+        if(flip){
+            def.position.set(x,y+0.55f);
         }else{
             def.position.set(x,y);
         }
@@ -64,7 +64,7 @@ public class GusanoEntity extends Actor {
         frame = (TextureRegion) move.getKeyFrame(time);
         if (flip) {
             setPosition((body.getPosition().x-0.50f)*PIXELS_IN_METER,
-                    (body.getPosition().y-1.98f)*PIXELS_IN_METER);
+                    (body.getPosition().y-2.50f)*PIXELS_IN_METER);
             batch.draw(frame, getX(), getY()+getHeight(), getWidth(), -getHeight());
         }else{
             setPosition((body.getPosition().x-0.50f)*PIXELS_IN_METER,

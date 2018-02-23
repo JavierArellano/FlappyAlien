@@ -90,7 +90,7 @@ public class GameScreen extends BaseScreen {
         //floorList.add(new FloorEntity(world, floorTexture,0,1000,1));
         for (int i = 1; i < 101; i++) {
             gusanoList.add(new GusanoEntity(world, enemyTexture, 15*i,2.45f, false));
-            gusanoList.add(new GusanoEntity(world, enemyTexture, 15*i,13.50f, true));
+            gusanoList.add(new GusanoEntity(world, enemyTexture, 15*i,14f, true));
         }
         //whispList.add(new WhispEntity(world, enemyTexture, 7.5f, 8, true));
         for (int i = 9; i <45 ; i++) {
