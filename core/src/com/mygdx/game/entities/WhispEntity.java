@@ -72,7 +72,7 @@ public class WhispEntity extends Actor {
     private void saltar(){
         Vector2 position = body.getPosition();
         if (position.y<3f) {
-            body.applyLinearImpulse(0, 20, position.x, position.y, true);
+            body.applyLinearImpulse(0, 21, position.x, position.y, true);
         }else {
             body.applyLinearImpulse(0, 18, position.x, position.y, true);
         }
