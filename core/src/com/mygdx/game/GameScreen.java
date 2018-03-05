@@ -54,6 +54,9 @@ public class GameScreen extends BaseScreen {
                 if (areCollided(contact, "player", "gusano")){
                     player.setAlive(false);
                 }
+                if (areCollided(contact, "player", "mosca")){
+                    player.setAlive(false);
+                }
             }
 
             @Override
@@ -80,7 +83,7 @@ public class GameScreen extends BaseScreen {
         Texture floorTexture = game.getManager().get("floor.png");
         Texture roofTexture = game.getManager().get("roof.png");
 
-        player = new PlayerEntity(world, playerTexture, new Vector2(1,8));
+        player = new PlayerEntity(world, playerTexture, new Vector2(1,7.5f));
         for (int i = 0; i < 1000; i++) {
             floorList.add(new FloorEntity(world, floorTexture,i,1f,1, false));
         }
@@ -92,12 +95,15 @@ public class GameScreen extends BaseScreen {
             gusanoList.add(new GusanoEntity(world, enemyTexture, 15*i,2.45f, false));
             gusanoList.add(new GusanoEntity(world, enemyTexture, 15*i,14f, true));
         }
-        //whispList.add(new WhispEntity(world, enemyTexture, 15f, 7, true));
         for (int i = 9; i <45 ; i++) {
             if (i<19) {
                 whispList.add(new WhispEntity(world, enemyTexture, (15 * i) + 7.5f, 8, false));
             }else{
-                whispList.add(new WhispEntity(world, enemyTexture, (15 * i) + 7.5f, 8, true));
+                if (i%2==0) {
+                    whispList.add(new WhispEntity(world, enemyTexture, (15 * i) + 7.5f, 13, true));
+                }else{
+                    whispList.add(new WhispEntity(world, enemyTexture, (15 * i) + 7.5f, 2, true));
+                }
             }
         }
 

@@ -50,7 +50,7 @@ public class WhispEntity extends Actor {
         PolygonShape box = new PolygonShape();
         box.setAsBox(0.57f,0.45f);
         fixture = body.createFixture(box,1);
-        fixture.setUserData("gusano");
+        fixture.setUserData("mosca");
         box.dispose();
 
         move = new Animation(0.15f, fly, fly_fly);
@@ -64,7 +64,9 @@ public class WhispEntity extends Actor {
         time = time + delta;
         if(mover) {
             if (body.getLinearVelocity().y < -8.482326f && body.getPosition().y < 5.4754916f) {
-                //System.out.println("velocidad en y: "+body.getLinearVelocity().y+"; posicion en y: "+body.getPosition().y);
+                saltar();
+            }
+            if(body.getPosition().y <3f){
                 saltar();
             }
         }
@@ -72,7 +74,7 @@ public class WhispEntity extends Actor {
     private void saltar(){
         Vector2 position = body.getPosition();
         if (position.y<3f) {
-            body.applyLinearImpulse(0, 21, position.x, position.y, true);
+            body.applyLinearImpulse(0, 19, position.x, position.y, true);
         }else {
             body.applyLinearImpulse(0, 18, position.x, position.y, true);
         }
