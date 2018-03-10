@@ -16,7 +16,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.entities.FloorEntity;
-import com.mygdx.game.entities.GroundEntity;
 import com.mygdx.game.entities.GusanoEntity;
 import com.mygdx.game.entities.PlayerEntity;
 import com.mygdx.game.entities.WhispEntity;
@@ -40,7 +39,6 @@ public class GameScreen extends BaseScreen {
     private List<FloorEntity> roofList = new ArrayList<FloorEntity>();
     private List<GusanoEntity> gusanoList = new ArrayList<GusanoEntity>();
     private List<WhispEntity> whispList = new ArrayList<WhispEntity>();
-    private List<GroundEntity> groundList = new ArrayList<GroundEntity>();
     private Sound saltoSound, dieSound;
     private Music bgMusic;
 
@@ -149,9 +147,6 @@ public class GameScreen extends BaseScreen {
         for(FloorEntity floor : floorList){
             stage.addActor(floor);
         }
-        for(GroundEntity ground : groundList){
-            stage.addActor(ground);
-        }
         for(FloorEntity roof : roofList){
             stage.addActor(roof);
         }
@@ -172,10 +167,6 @@ public class GameScreen extends BaseScreen {
         for(FloorEntity floor : floorList){
             floor.detach();
             floor.remove();
-        }
-        for(GroundEntity ground : groundList){
-            ground.detach();
-            ground.remove();
         }
         for(FloorEntity roof : roofList){
             roof.detach();
