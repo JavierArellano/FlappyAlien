@@ -49,7 +49,7 @@ public class PlayerEntity extends Actor {
         this.textureD = textureD;
 
         BodyDef def = new BodyDef();
-        def.position.set(posicion);//-4,7);
+        def.position.set(posicion);
         def.type = BodyDef.BodyType.DynamicBody;
         body = world.createBody(def);
 

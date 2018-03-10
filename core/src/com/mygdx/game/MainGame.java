@@ -28,6 +28,7 @@ public class MainGame extends Game {
         manager = new AssetManager();
         manager.load("floor.png", Texture.class);
         manager.load("roof.png", Texture.class);
+        manager.load("ground.png", Texture.class);
         manager.load("players.png", Texture.class);
         manager.load("enemies.png", Texture.class);
         manager.load("gameover.png", Texture.class);
@@ -38,6 +39,7 @@ public class MainGame extends Game {
 
         gameOverScreen = new GameOverScreen(this);
         gameStartScreen = new GameStartScreen(this);
+        gameScreen = new GameScreen(this);
 
         setScreen(gameStartScreen);
     }

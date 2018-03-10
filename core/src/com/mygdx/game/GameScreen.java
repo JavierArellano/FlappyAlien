@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.entities.FloorEntity;
+import com.mygdx.game.entities.GroundEntity;
 import com.mygdx.game.entities.GusanoEntity;
 import com.mygdx.game.entities.PlayerEntity;
 import com.mygdx.game.entities.WhispEntity;
@@ -39,6 +40,7 @@ public class GameScreen extends BaseScreen {
     private List<FloorEntity> roofList = new ArrayList<FloorEntity>();
     private List<GusanoEntity> gusanoList = new ArrayList<GusanoEntity>();
     private List<WhispEntity> whispList = new ArrayList<WhispEntity>();
+    private List<GroundEntity> groundList = new ArrayList<GroundEntity>();
     private Sound saltoSound, dieSound;
     private Music bgMusic;
 
@@ -85,7 +87,6 @@ public class GameScreen extends BaseScreen {
                                     Actions.run(new Runnable() {
                                         @Override
                                         public void run() {
-                                            System.out.println("muerto contra mosca");
                                             game.setScreen(game.gameOverScreen);
                                         }
                                     })
@@ -120,10 +121,11 @@ public class GameScreen extends BaseScreen {
         Texture roofTexture = game.getManager().get("roof.png");
 
         player = new PlayerEntity(world, playerTexture, new Vector2(1,7.5f));
-        for (int i = 0; i < 1000; i++) {
+
+        for (int i = 0; i < 500; i++) {
             floorList.add(new FloorEntity(world, floorTexture,i,1f,1, false));
         }
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 500; i++) {
             roofList.add(new FloorEntity(world, roofTexture,i,1f, 16, true));
         }
         //floorList.add(new FloorEntity(world, floorTexture,0,1000,1));
@@ -147,6 +149,9 @@ public class GameScreen extends BaseScreen {
         for(FloorEntity floor : floorList){
             stage.addActor(floor);
         }
+        for(GroundEntity ground : groundList){
+            stage.addActor(ground);
+        }
         for(FloorEntity roof : roofList){
             stage.addActor(roof);
         }
@@ -167,6 +172,10 @@ public class GameScreen extends BaseScreen {
         for(FloorEntity floor : floorList){
             floor.detach();
             floor.remove();
+        }
+        for(GroundEntity ground : groundList){
+            ground.detach();
+            ground.remove();
         }
         for(FloorEntity roof : roofList){
             roof.detach();
