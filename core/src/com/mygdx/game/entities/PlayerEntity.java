@@ -28,6 +28,7 @@ public class PlayerEntity extends Actor {
     private Body body;
     private Fixture fixture;
     private boolean alive = true;
+    private boolean cambio = true;
     private float time=0;
 
     public PlayerEntity(World world, Texture texture, Vector2 posicion) {
@@ -68,14 +69,11 @@ public class PlayerEntity extends Actor {
     public void act(float delta) {
         time = time + delta;
         if (isAlive()){
-            if (Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Input.Keys.UP)){
-                saltar();
-            }
             float speedy = body.getLinearVelocity().y;
             body.setLinearVelocity(VELOCITY_X,speedy);
         }
     }
-    private void saltar(){
+    public void saltar(){
         Vector2 position = body.getPosition();
         body.applyLinearImpulse(0,20, position.x,position.y, true);
     }
@@ -96,6 +94,14 @@ public class PlayerEntity extends Actor {
     public void detach(){
         body.destroyFixture(fixture);
         world.destroyBody(body);
+    }
+
+    public boolean isCambio() {
+        return cambio;
+    }
+
+    public void setCambio(boolean cambio) {
+        this.cambio = cambio;
     }
 
     public boolean isAlive() {
