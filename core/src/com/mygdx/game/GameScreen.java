@@ -112,7 +112,7 @@ public class GameScreen extends BaseScreen {
         });
 
         saltoSound = game.getManager().get("audio/salto.mp3");
-        dieSound = game.getManager().get("audio/die.ogg");
+        dieSound = game.getManager().get("audio/dolorsito.mp3");
         bgMusic = game.getManager().get("audio/music.wav");
     }
 
@@ -167,9 +167,8 @@ public class GameScreen extends BaseScreen {
         stage.getCamera().position.set(position);
         stage.getCamera().update();
 
-        bgMusic.setVolume(0.50f);
+        bgMusic.setVolume(0.25f);
         bgMusic.play();
-        System.out.println("show GameScreen");
     }
 
     @Override
@@ -189,11 +188,11 @@ public class GameScreen extends BaseScreen {
             whisp.detach();
         }
         player.detach();
+
         floorList.clear();
         roofList.clear();
         gusanoList.clear();
         whispList.clear();
-        System.out.println("hide GameScreen");
     }
 
     @Override

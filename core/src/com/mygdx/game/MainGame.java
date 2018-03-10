@@ -34,7 +34,7 @@ public class MainGame extends Game {
         manager.load("enemies.png", Texture.class);
         manager.load("gameover.png", Texture.class);
         manager.load("flappy.png", Texture.class);
-        manager.load("audio/die.ogg", Sound.class);
+        manager.load("audio/dolorsito.mp3", Sound.class);
         manager.load("audio/salto.mp3", Sound.class);
         manager.load("audio/music.wav", Music.class);
         manager.finishLoading();
