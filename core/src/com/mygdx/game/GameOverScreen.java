@@ -33,7 +33,7 @@ public class GameOverScreen extends BaseScreen {
         retry.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                game.iniciarGameScreen();
+                //game.iniciarGameScreen();
                 game.setScreen(game.gameScreen);
             }
         });

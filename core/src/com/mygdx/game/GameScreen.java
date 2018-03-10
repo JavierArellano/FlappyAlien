@@ -7,6 +7,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
@@ -41,15 +42,14 @@ public class GameScreen extends BaseScreen {
     private List<WhispEntity> whispList = new ArrayList<WhispEntity>();
     private Sound saltoSound, dieSound;
     private Music bgMusic;
+    private Vector3 position;
 
     public GameScreen(final MainGame game) {
         super(game);
-        saltoSound = game.getManager().get("audio/salto.mp3");
-        dieSound = game.getManager().get("audio/die.ogg");
-        bgMusic = game.getManager().get("audio/music.wav");
         stage = new Stage(new FitViewport(1120,630));
-        world = new World(new Vector2(0,-10), true);
+        position = new Vector3(stage.getCamera().position);
 
+        world = new World(new Vector2(0,-10), true);
         world.setContactListener(new ContactListener() {
             private boolean areCollided(Contact contact, Object userA, Object userB){
                 return contact.getFixtureA().getUserData().equals(userA)&& contact.getFixtureB().getUserData().equals(userB) ||
@@ -85,6 +85,7 @@ public class GameScreen extends BaseScreen {
                                     Actions.run(new Runnable() {
                                         @Override
                                         public void run() {
+                                            bgMusic.stop();
                                             game.setScreen(game.gameOverScreen);
                                         }
                                     })
@@ -109,6 +110,10 @@ public class GameScreen extends BaseScreen {
 
             }
         });
+
+        saltoSound = game.getManager().get("audio/salto.mp3");
+        dieSound = game.getManager().get("audio/die.ogg");
+        bgMusic = game.getManager().get("audio/music.wav");
     }
 
     @Override
@@ -117,6 +122,8 @@ public class GameScreen extends BaseScreen {
         Texture enemyTexture = game.getManager().get("enemies.png");
         Texture floorTexture = game.getManager().get("floor.png");
         Texture roofTexture = game.getManager().get("roof.png");
+
+        stage.getCamera().position.set(stage.getWidth() / 2, stage.getHeight() / 2, 0);
 
         player = new PlayerEntity(world, playerTexture, new Vector2(1,7.5f));
 
@@ -157,31 +164,36 @@ public class GameScreen extends BaseScreen {
             stage.addActor(whisp);
         }
 
-        bgMusic.setVolume(0.70f);
+        stage.getCamera().position.set(position);
+        stage.getCamera().update();
+
+        bgMusic.setVolume(0.50f);
         bgMusic.play();
+        System.out.println("show GameScreen");
     }
 
     @Override
     public void hide() {
-        bgMusic.stop();
+        stage.clear();
+
         for(FloorEntity floor : floorList){
             floor.detach();
-            floor.remove();
         }
         for(FloorEntity roof : roofList){
             roof.detach();
-            roof.remove();
         }
         for(GusanoEntity gusano : gusanoList){
             gusano.detach();
-            gusano.remove();
         }
         for(WhispEntity whisp : whispList){
             whisp.detach();
-            whisp.remove();
         }
         player.detach();
-        player.remove();
+        floorList.clear();
+        roofList.clear();
+        gusanoList.clear();
+        whispList.clear();
+        System.out.println("hide GameScreen");
     }
 
     @Override

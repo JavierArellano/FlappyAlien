@@ -20,6 +20,7 @@ public class MainGame extends Game {
     public GameOverScreen gameOverScreen;
     public GameStartScreen gameStartScreen;
     private AssetManager manager;
+
     public AssetManager getManager(){
         return manager;
     }
@@ -32,20 +33,17 @@ public class MainGame extends Game {
         manager.load("players.png", Texture.class);
         manager.load("enemies.png", Texture.class);
         manager.load("gameover.png", Texture.class);
+        manager.load("flappy.png", Texture.class);
         manager.load("audio/die.ogg", Sound.class);
         manager.load("audio/salto.mp3", Sound.class);
         manager.load("audio/music.wav", Music.class);
         manager.finishLoading();
 
+        gameScreen = new GameScreen(this);
         gameOverScreen = new GameOverScreen(this);
         gameStartScreen = new GameStartScreen(this);
-        gameScreen = new GameScreen(this);
 
         setScreen(gameStartScreen);
-    }
-
-    public void iniciarGameScreen(){
-        gameScreen = new GameScreen(this);
     }
 
 }
