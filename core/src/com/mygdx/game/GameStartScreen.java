@@ -30,6 +30,8 @@ public class GameStartScreen  extends BaseScreen {
         gameStart = new Image(game.getManager().get("flappy.png", Texture.class));
         start = new TextButton("Inicio", skin);
         credits = new TextButton("Creditos", skin);
+        start.getLabel().setFontScale(1.5f);
+        credits.getLabel().setFontScale(1.5f);
 
         credits.addCaptureListener(new ChangeListener() {
             @Override

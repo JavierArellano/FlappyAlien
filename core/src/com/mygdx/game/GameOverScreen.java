@@ -30,6 +30,8 @@ public class GameOverScreen extends BaseScreen {
         gameOver = new Image(game.getManager().get("gameover.png", Texture.class));
         retry = new TextButton("Reintentar", skin);
         start = new TextButton("Volver a Inicio", skin);
+        start.getLabel().setFontScale(1.5f);
+        retry.getLabel().setFontScale(1.5f);
 
         retry.addCaptureListener(new ChangeListener() {
             @Override

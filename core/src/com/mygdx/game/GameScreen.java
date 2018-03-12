@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
@@ -15,6 +16,8 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.entities.FloorEntity;
 import com.mygdx.game.entities.GusanoEntity;
@@ -33,7 +36,7 @@ import static com.mygdx.game.Constants.VELOCITY_X;
 
 public class GameScreen extends BaseScreen {
 
-    private Stage stage;
+    private Stage stage, stage2;
     private World world;
     private PlayerEntity player;
     private List<FloorEntity> floorList = new ArrayList<FloorEntity>();
@@ -43,10 +46,15 @@ public class GameScreen extends BaseScreen {
     private Sound saltoSound, dieSound;
     private Music bgMusic;
     private Vector3 position;
+    private Label puntos;
+    private Skin skin;
+    private int puntuacion;
+    private float posi=10*PIXELS_IN_METER;
 
     public GameScreen(final MainGame game) {
         super(game);
         stage = new Stage(new FitViewport(1120,630));
+        stage2 = new Stage(new FitViewport(1120,630));
         position = new Vector3(stage.getCamera().position);
 
         world = new World(new Vector2(0,-10), true);
@@ -114,6 +122,8 @@ public class GameScreen extends BaseScreen {
         saltoSound = game.getManager().get("audio/salto.mp3");
         dieSound = game.getManager().get("audio/dolorsito.mp3");
         bgMusic = game.getManager().get("audio/music.wav");
+
+        skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
     }
 
     @Override
@@ -122,6 +132,12 @@ public class GameScreen extends BaseScreen {
         Texture enemyTexture = game.getManager().get("enemies.png");
         Texture floorTexture = game.getManager().get("floor.png");
         Texture roofTexture = game.getManager().get("roof.png");
+
+        puntos = new Label("0", skin);
+        puntuacion = 0;
+        puntos.setFontScale(1.5f);
+        puntos.setColor(Color.RED);
+
 
         stage.getCamera().position.set(stage.getWidth() / 2, stage.getHeight() / 2, 0);
 
@@ -149,6 +165,7 @@ public class GameScreen extends BaseScreen {
             }
         }
 
+        stage2.addActor(puntos);
         stage.addActor(player);
         for(FloorEntity floor : floorList){
             stage.addActor(floor);
@@ -173,6 +190,7 @@ public class GameScreen extends BaseScreen {
     @Override
     public void hide() {
         stage.clear();
+        stage2.clear();
 
         for(FloorEntity floor : floorList){
             floor.detach();
@@ -200,21 +218,32 @@ public class GameScreen extends BaseScreen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         if (player.getX()>150 && player.isAlive()) {
             stage.getCamera().translate(VELOCITY_X * delta * PIXELS_IN_METER, 0, 0);
+
+            puntos.setPosition(2*PIXELS_IN_METER, 15.4f*PIXELS_IN_METER);
         }
         if (player.isAlive()){
             if (Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Input.Keys.UP)){
                 saltoSound.play();
                 player.saltar();
             }
+            if (player.getX()>=posi){
+                posi+=10*PIXELS_IN_METER;
+                puntuacion++;
+                String pt = String.valueOf(puntuacion);
+                puntos.setText(pt);
+            }
         }
         stage.act();
         world.step(delta, 6,2);
         stage.draw();
+        stage2.act();
+        stage2.draw();
     }
 
     @Override
     public void dispose() {
         stage.dispose();
+        stage2.dispose();
         world.dispose();
     }
 }

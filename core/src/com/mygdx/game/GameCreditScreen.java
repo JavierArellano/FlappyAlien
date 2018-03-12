@@ -32,6 +32,8 @@ public class GameCreditScreen extends BaseScreen {
         gameOver = new Image(game.getManager().get("flappy.png", Texture.class));
         volver = new TextButton("Volver", skin);
         creditos = new Label("Juego Desarrollado por:\nFrancisco Javier Arellano Carrascosa\n2ºDAM", skin);
+        creditos.setFontScale(1.5f);
+        volver.getLabel().setFontScale(1.5f);
 
         volver.addCaptureListener(new ChangeListener() {
             @Override
