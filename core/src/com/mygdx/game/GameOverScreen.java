@@ -20,7 +20,7 @@ public class GameOverScreen extends BaseScreen {
     private Stage stage;
     private Skin skin;
     private Image gameOver;
-    private TextButton retry;
+    private TextButton retry, start;
 
     public GameOverScreen(final MainGame game) {
         super(game);
@@ -29,6 +29,7 @@ public class GameOverScreen extends BaseScreen {
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
         gameOver = new Image(game.getManager().get("gameover.png", Texture.class));
         retry = new TextButton("Reintentar", skin);
+        start = new TextButton("Volver a Inicio", skin);
 
         retry.addCaptureListener(new ChangeListener() {
             @Override
@@ -37,11 +38,21 @@ public class GameOverScreen extends BaseScreen {
             }
         });
 
+        start.addCaptureListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                game.setScreen(game.gameStartScreen);
+            }
+        });
+
         gameOver.setPosition(560-(gameOver.getWidth()/2), 460-gameOver.getHeight());
         retry.setSize(150,75);
         retry.setPosition(460,150);
+        start.setSize(150,75);
+        start.setPosition(460,50);
 
         stage.addActor(retry);
+        stage.addActor(start);
         stage.addActor(gameOver);
     }
 
