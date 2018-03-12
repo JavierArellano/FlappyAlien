@@ -135,8 +135,10 @@ public class GameScreen extends BaseScreen {
 
         puntos = new Label("0", skin);
         puntuacion = 0;
+        posi=10*PIXELS_IN_METER;
         puntos.setFontScale(1.5f);
         puntos.setColor(Color.RED);
+        puntos.setPosition(2*PIXELS_IN_METER, 15.4f*PIXELS_IN_METER);
 
 
         stage.getCamera().position.set(stage.getWidth() / 2, stage.getHeight() / 2, 0);
@@ -218,11 +220,9 @@ public class GameScreen extends BaseScreen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         if (player.getX()>150 && player.isAlive()) {
             stage.getCamera().translate(VELOCITY_X * delta * PIXELS_IN_METER, 0, 0);
-
-            puntos.setPosition(2*PIXELS_IN_METER, 15.4f*PIXELS_IN_METER);
         }
         if (player.isAlive()){
-            if (Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Input.Keys.UP)){
+            if (Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Input.Keys.UP) || Gdx.input.isKeyJustPressed(Input.Keys.W)){
                 saltoSound.play();
                 player.saltar();
             }
