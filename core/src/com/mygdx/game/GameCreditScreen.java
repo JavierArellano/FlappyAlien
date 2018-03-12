@@ -6,42 +6,47 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 /**
- * Creado por franj en 06/03/2018.
+ * Creado por franj en 12/03/2018.
  */
 
-public class GameOverScreen extends BaseScreen {
+public class GameCreditScreen extends BaseScreen {
 
     private Stage stage;
     private Skin skin;
     private Image gameOver;
-    private TextButton retry;
+    private TextButton volver;
+    private Label creditos;
 
-    public GameOverScreen(final MainGame game) {
+    public GameCreditScreen(final MainGame game) {
         super(game);
 
         stage = new Stage(new FitViewport(1120,630));
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
-        gameOver = new Image(game.getManager().get("gameover.png", Texture.class));
-        retry = new TextButton("Reintentar", skin);
+        gameOver = new Image(game.getManager().get("flappy.png", Texture.class));
+        volver = new TextButton("Volver", skin);
+        creditos = new Label("Juego Desarrollado por:\nFrancisco Javier Arellano Carrascosa\n2ºDAM", skin);
 
-        retry.addCaptureListener(new ChangeListener() {
+        volver.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                game.setScreen(game.gameScreen);
+                game.setScreen(game.gameStartScreen);
             }
         });
 
         gameOver.setPosition(560-(gameOver.getWidth()/2), 460-gameOver.getHeight());
-        retry.setSize(150,75);
-        retry.setPosition(460,150);
+        volver.setSize(150,75);
+        volver.setPosition(460,50);
+        creditos.setPosition(460, 170);
 
-        stage.addActor(retry);
+        stage.addActor(creditos);
+        stage.addActor(volver);
         stage.addActor(gameOver);
     }
 

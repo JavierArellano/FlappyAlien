@@ -19,6 +19,7 @@ public class MainGame extends Game {
     public GameScreen gameScreen;
     public GameOverScreen gameOverScreen;
     public GameStartScreen gameStartScreen;
+    public GameCreditScreen gameCreditScreen;
     private AssetManager manager;
 
     public AssetManager getManager(){
@@ -42,6 +43,8 @@ public class MainGame extends Game {
         gameScreen = new GameScreen(this);
         gameOverScreen = new GameOverScreen(this);
         gameStartScreen = new GameStartScreen(this);
+        gameCreditScreen = new GameCreditScreen(this);
+
 
         setScreen(gameStartScreen);
     }

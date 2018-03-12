@@ -133,19 +133,18 @@ public class GameScreen extends BaseScreen {
         for (int i = 0; i < 500; i++) {
             roofList.add(new FloorEntity(world, roofTexture,i,1f, 16, true));
         }
-        //floorList.add(new FloorEntity(world, floorTexture,0,1000,1));
-        for (int i = 1; i < 101; i++) {
-            gusanoList.add(new GusanoEntity(world, enemyTexture, 15*i,2.45f, false));
-            gusanoList.add(new GusanoEntity(world, enemyTexture, 15*i,14f, true));
+        for (int i = 1; i < 35; i++) {
+            gusanoList.add(new GusanoEntity(world, enemyTexture, 10*i,2.45f, false));
+            gusanoList.add(new GusanoEntity(world, enemyTexture, 10*i,14f, true));
         }
-        for (int i = 9; i <45 ; i++) {
+        for (int i = 9; i < 30 ; i++) {
             if (i<19) {
-                whispList.add(new WhispEntity(world, enemyTexture, (15 * i) + 7.5f, 8, false));
+                whispList.add(new WhispEntity(world, enemyTexture, (10 * i) + 5f, 8, false));
             }else{
                 if (i%2==0) {
-                    whispList.add(new WhispEntity(world, enemyTexture, (15 * i) + 7.5f, 13, true));
+                    whispList.add(new WhispEntity(world, enemyTexture, (10 * i) + 5f, 13, true));
                 }else{
-                    whispList.add(new WhispEntity(world, enemyTexture, (15 * i) + 7.5f, 2, true));
+                    whispList.add(new WhispEntity(world, enemyTexture, (10 * i) + 5f, 2, true));
                 }
             }
         }

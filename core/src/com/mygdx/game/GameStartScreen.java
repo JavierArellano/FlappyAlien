@@ -20,7 +20,7 @@ public class GameStartScreen  extends BaseScreen {
     private Stage stage;
     private Skin skin;
     private Image gameStart;
-    private TextButton retry;
+    private TextButton start, credits;
 
     public GameStartScreen(final MainGame game) {
         super(game);
@@ -28,21 +28,32 @@ public class GameStartScreen  extends BaseScreen {
         stage = new Stage(new FitViewport(1120, 630));
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
         gameStart = new Image(game.getManager().get("flappy.png", Texture.class));
-        retry = new TextButton("Inicio", skin);
+        start = new TextButton("Inicio", skin);
+        credits = new TextButton("Creditos", skin);
 
-        retry.addCaptureListener(new ChangeListener() {
+        credits.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                //game.iniciarGameScreen();
+                game.setScreen(game.gameCreditScreen);
+            }
+        });
+
+        start.addCaptureListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
                 game.setScreen(game.gameScreen);
             }
         });
 
         gameStart.setPosition(560 - (gameStart.getWidth() / 2), 460 - gameStart.getHeight());
-        retry.setSize(200, 100);
-        retry.setPosition(460, 150);
+        start.setSize(150, 75);
+        start.setPosition(460, 150);
 
-        stage.addActor(retry);
+        credits.setSize(150,75);
+        credits.setPosition(460,50);
+
+        stage.addActor(credits);
+        stage.addActor(start);
         stage.addActor(gameStart);
     }
 
