@@ -33,13 +33,6 @@ public class PlayerEntity extends Actor {
 
     public PlayerEntity(World world, Texture texture, Vector2 posicion) {
         this.world = world;
-        /*
-            <SubTexture height="256" width="128" y="1536" x="0" name="alienBeige_hit.png"/>
-
-            <SubTexture height="256" width="128" y="768" x="0" name="alienBeige_swim1.png"/>
-
-            <SubTexture height="256" width="128" y="512" x="0" name="alienBeige_swim2.png"/>
-         */
 
         TextureRegion texture1 = new TextureRegion(texture, 0, 768, 128,256);
         TextureRegion texture2 = new TextureRegion(texture, 0, 512, 128,256);
